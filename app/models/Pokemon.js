@@ -44,6 +44,13 @@ const pokemonSchema = new mongoose.Schema(
 			trim: true,
 			maxlength: [25, `The max length for a move is 25 characters`],
 		},
+
+		games: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "PokemonGame",
+			},
+		],
 	},
 	{ timestamps: true }
 );

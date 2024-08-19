@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// const { type } = require("os");
+const { type } = require("os");
 
 const pokemonGamesSchema = new mongoose.Schema(
 	{
@@ -11,7 +11,6 @@ const pokemonGamesSchema = new mongoose.Schema(
 
 		games: {
 			type: [String],
-			ref: "PokemonGame",
 			enum: [
 				"Red",
 				"Yellow",
@@ -33,10 +32,34 @@ const pokemonGamesSchema = new mongoose.Schema(
 				"White",
 				"Colosseum",
 				"XD",
+				"Black 2",
+				"White 2",
+				"X",
+				"Y",
+				"Omega-Ruby",
+				"Alpha-Sapphire",
+				"Sun",
+				"Ultra Sun",
+				"Moon",
+				"Ultra Moon",
+				"Let's Go Pikachu",
+				"Let's Go Eevee",
+				"Sword",
+				"Shield",
+				"The Isle or Armor",
+				"The Crown Tundra",
+				"Brilliant Diamond",
+				"Shining Pearl",
+				"Legends - Arceus",
+				"Scarlet",
+				"Violet",
+				"The Teal Mask",
+				"The Indigo Disk",
 			],
 		},
 		pokemon: {
 			type: mongoose.Schema.Types.ObjectId,
+			required: true,
 			ref: "Pokemon",
 		},
 	},

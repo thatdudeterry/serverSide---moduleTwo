@@ -1,13 +1,17 @@
 const PokemonGame = require("../models/PokemonGame");
 
 exports.createPokemonGame = async (req, res) => {
-	const { pokemonGame } = req.body;
+	const { gameIndex, games, pokemon } = req.body;
 	try {
-		const newPokemonGame = await PokemonGame.create(pokemonGame);
+		const newPokemonGame = await PokemonGame.create({
+			gameIndex,
+			games,
+			pokemon,
+		});
 		console.log("data >>>", newPokemonGame);
 		res.status(200).json({
 			success: true,
-			data: pokemonGame,
+			data: newPokemonGame,
 			message: `${req.method} - request to PokemonGame endpoint`,
 		});
 	} catch (error) {

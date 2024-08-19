@@ -1,8 +1,7 @@
-// ^ /app/routes/index.js
-
 const express = require("express");
 const router = express.Router();
 const pokemonRoutes = require("./pokemonRoutes");
+const pokemonGameRoutes = require("./pokemonGamesRoutes");
 
 router.get("/", (req, res) => {
 	res.status(200).json({
@@ -12,5 +11,6 @@ router.get("/", (req, res) => {
 });
 
 router.use("/pokemon", pokemonRoutes);
+router.use("/games", pokemonGameRoutes);
 
 module.exports = router;

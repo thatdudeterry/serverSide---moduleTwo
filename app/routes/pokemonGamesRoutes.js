@@ -5,7 +5,7 @@ const {
 	getAllPokemonGames,
 	getPokemonGameById,
 	updatePokemonGame,
-} = require("../controller/pokemonController");
+} = require("../controller/pokemonGameController");
 
 router.post("/", createPokemonGame);
 router.delete("/:id", deletePokemonGame);

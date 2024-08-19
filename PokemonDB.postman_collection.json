@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "52a50f14-e3ff-451f-8c58-9fdf7cfb8b5e",
+		"name": "PokemonDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37536556"
+	},
+	"item": [
+		{
+			"name": "Pokemon",
+			"item": [
+				{
+					"name": "All Pokemon",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/api/v1/pokemon",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"pokemon"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Pokemon By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 (OK)\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Test if the Response has the Expected Properties",
+									"pm.test(\"Response has all required properties\", function () {",
+									"    const responseBody = pm.response.json();",
+									"    ",
+									"    // Check if the response contains 'data' and '_id' properties",
+									"    pm.expect(responseBody).to.have.property(\"data\").that.is.not.null;",
+									"    pm.expect(responseBody.data).to.have.property(\"_id\").that.is.not.null;",
+									"",
+									"    // Validate each expected property",
+									"    const { data } = responseBody;",
+									"    pm.expect(data).to.have.property(\"name\").that.is.a(\"string\");",
+									"    pm.expect(data).to.have.property(\"type\").that.is.a(\"string\");",
+									"    pm.expect(data).to.have.property(\"height\").that.is.a(\"number\");",
+									"    pm.expect(data).to.have.property(\"weight\").that.is.a(\"number\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/api/v1/pokemon/{{pokemonId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"pokemon",
+								"{{pokemonId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pokemon",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for Status Code",
+									"pm.test(\"Status code is 201 (Created)\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"// Test if the Response has Created Resource ID",
+									"pm.test(\"Response has created resource ID\", function () {",
+									"    const responseBody = pm.response.json();",
+									"    ",
+									"    // Check if the response contains 'data' and '_id' properties",
+									"    pm.expect(responseBody).to.have.property(\"data\").that.is.not.null;",
+									"    pm.expect(responseBody.data).to.have.property(\"_id\").that.is.not.null;",
+									"    ",
+									"    // Set the 'pokemonId' variable for use in subsequent requests",
+									"    pm.collectionVariables.set(\"pokemonId\", responseBody.data._id);",
+									"});",
+									"",
+									"// Validate All Properties in the Response",
+									"pm.test(\"The response has all properties\", function () {",
+									"    const responseBody = pm.response.json();",
+									"    ",
+									"    // Destructure the 'data' object",
+									"    const { data } = responseBody;",
+									"    ",
+									"    // Validate each expected property",
+									"    pm.expect(data).to.have.property(\"name\").that.is.a(\"string\");",
+									"    pm.expect(data.name).to.equal(\"TEST-TEST\");",
+									"    pm.expect(data).to.have.property(\"height\").that.is.a(\"number\");",
+									"    pm.expect(data.type).to.equal(\"POKEMON-TYPE\");",
+									"",
+									"});",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"pokemon\": {\n    \"name\": \"TEST-TEST\",\n    \"type\": \"POKEMON-TYPE\",\n    \"height\": \"123\",\n    \"weight\": \"456\",\n    \"abilities\": \"ABILITY\",\n    \"moves\": \"MOVES\",\n    \"games\": \"66c3717906764bda711231d8\"\n}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/api/v1/pokemon",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"pokemon"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pokemon",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/api/v1/pokemon/{{pokemonId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"pokemon",
+								"{{pokemonId}}"
+							]
+						},
+						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pokemon",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 (OK)\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has updated resource ID\", function () {",
+									"    const responseBody = pm.response.json();",
+									"    ",
+									"    pm.expect(responseBody).to.have.property(\"data\").that.is.not.null;",
+									"    pm.expect(responseBody.data).to.have.property(\"_id\").that.is.not.null;",
+									"    ",
+									"    const { data } = responseBody;",
+									"    pm.expect(data).to.have.property(\"name\").that.is.a(\"string\");",
+									"    pm.expect(data).to.have.property(\"type\").that.is.a(\"string\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"UPDATED-NAME\",\n    \"type\": \"UPDATED-TYPE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/api/v1/pokemon/{{pokemonId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"pokemon",
+								"{{pokemonId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "All Games",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/api/v1/games",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"games"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Game By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/api/v1/games/",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"games",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"gameIndex\": 132,\n  \"games\": [\"Silver\"],\n  \"-id\": \"66c2d415dd3db1a92f3ee23a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/api/v1/games",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/api/v1/games/",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"games",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Game",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/api/v1/games/",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"api",
+								"v1",
+								"games",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "pokemonId",
+			"value": ""
+		}
+	]
+}

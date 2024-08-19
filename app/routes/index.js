@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const authorRoutes = require("./authorRoutes");
+const pokemonRoutes = require("./pokemonRoutes");
 
 router.get("/", (req, res) => {
 	res.status(200).json({
@@ -11,6 +11,6 @@ router.get("/", (req, res) => {
 	});
 });
 
-router.use("/authors", authorRoutes);
+router.use("/pokemon", pokemonRoutes);
 
 module.exports = router;

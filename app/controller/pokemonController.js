@@ -5,8 +5,9 @@ exports.createPokemon = async (req, res) => {
 	try {
 		const newPokemon = await Pokemon.create(pokemon);
 		console.log("data >>>", newPokemon);
-		res.status(200).json({
+		res.status(201).json({
 			success: true,
+			data: newPokemon,
 			message: `${req.method} - request to Pokemon endpoint`,
 		});
 	} catch (error) {
@@ -22,12 +23,9 @@ exports.createPokemon = async (req, res) => {
 exports.deletePokemon = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const pokemon = await Pokemon.findByIdAndDelete(id, req.body, {
-			new: true,
-		});
+		const pokemon = await Pokemon.findByIdAndDelete(id, req.body);
 		res.status(200).json({
 			id,
-			data: pokemon,
 			success: true,
 			message: `${req.method} - request to Pokemon endpoint`,
 		});
@@ -82,11 +80,11 @@ exports.getPokemonById = async (req, res) => {
 exports.updatePokemon = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const pokemon = await Pokemon.findByIdAndUpdate(id, req.body, {
+		const updatedPokemon = await Pokemon.findByIdAndUpdate(id, req.body, {
 			new: true,
 		});
 		res.status(200).json({
-			data: pokemon,
+			data: updatedPokemon,
 			success: true,
 			message: `${req.method} - request to Pokemon endpoint`,
 		});

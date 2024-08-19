@@ -17,17 +17,15 @@ const pokemonSchema = new mongoose.Schema(
 			maxlength: [25, `The max length for a name is 25 characters`],
 		},
 
-		stats: {
-			height: {
-				type: Number,
-				min: [0, `Value must be greater than 0`],
-				max: [1000, `Value must be less than 1000`],
-			},
-			weight: {
-				type: Number,
-				min: [0, `Value must be greater than 0`],
-				max: [1000, `Value must be less than 1000`],
-			},
+		height: {
+			type: Number,
+			min: [0, `Value must be greater than 0`],
+			max: [1000, `Value must be less than 1000`],
+		},
+		weight: {
+			type: Number,
+			min: [0, `Value must be greater than 0`],
+			max: [1000, `Value must be less than 1000`],
 		},
 
 		abilities: {

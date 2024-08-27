@@ -14,6 +14,28 @@ const pokemonSchema = new mongoose.Schema(
 		type: {
 			type: String,
 			trim: true,
+			enum: [
+				"Normal",
+				"Fire",
+				"Water",
+				"Electtric",
+				"Grass",
+				"Ice",
+				"Fighting",
+				"Poison",
+				"Ground",
+				"Flying",
+				"Pshychic",
+				"Bug",
+				"Rock",
+				"Ghost",
+				"Dragon",
+				"Dark",
+				"Steel",
+				"Fairy",
+				"Other",
+			],
+
 			maxlength: [25, `The max length for a name is 25 characters`],
 		},
 

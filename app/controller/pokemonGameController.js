@@ -1,4 +1,5 @@
 const PokemonGame = require("../models/PokemonGame");
+const mongoose = require("mongoose");
 
 exports.createPokemonGame = async (req, res) => {
 	const { gameIndex, games, pokemon } = req.body;
@@ -17,6 +18,7 @@ exports.createPokemonGame = async (req, res) => {
 	} catch (error) {
 		if (error.name === "ValidationError") {
 			console.log("Error Validating!", error);
+			res.status(400).json(error);
 		} else {
 			console.log(error);
 			res.status(500).json(error);
@@ -38,6 +40,7 @@ exports.deletePokemonGame = async (req, res) => {
 	} catch (error) {
 		if (error.name === "ValidationError") {
 			console.log("Error Validating!", error);
+			res.status(400).json(error);
 		} else {
 			console.log(error);
 			res.status(500).json(error);
@@ -56,6 +59,7 @@ exports.getAllPokemonGames = async (req, res) => {
 	} catch (error) {
 		if (error.name === "ValidationError") {
 			console.log("Error Validating!", error);
+			res.status(400).json(error);
 		} else {
 			console.log(error);
 			res.status(500).json(error);
@@ -66,9 +70,7 @@ exports.getAllPokemonGames = async (req, res) => {
 exports.getPokemonGameById = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const pokemonGame = await PokemonGame.findById(id, req.body, {
-			new: true,
-		});
+		const pokemonGame = await PokemonGame.findById(id, { new: true });
 		res.status(200).json({
 			id,
 			data: pokemonGame,
@@ -78,6 +80,7 @@ exports.getPokemonGameById = async (req, res) => {
 	} catch (error) {
 		if (error.name === "ValidationError") {
 			console.log("Error Validating!", error);
+			res.status(400).json(error);
 		} else {
 			console.log(error);
 			res.status(500).json(error);

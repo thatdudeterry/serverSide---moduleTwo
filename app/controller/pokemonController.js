@@ -43,6 +43,7 @@ exports.getAllPokemon = async (req, res) => {
 	console.log(">>>", req.query);
 	let queryString = JSON.stringify(req.query);
 
+	// Convert query operators to MongoDB format
 	queryString = queryString.replace(
 		/\b(gt|gte|lt|lte)\b/g,
 		(match) => `$${match}`
@@ -51,17 +52,19 @@ exports.getAllPokemon = async (req, res) => {
 	let query = Pokemon.find(JSON.parse(queryString));
 	console.log(JSON.parse(queryString));
 
+	// Apply field selection if specified
 	if (req.query.select) {
 		const fields = req.query.select.split(",").join(" ");
-		query = Pokemon.find({}).select(fields);
+		query = query.select(fields);
 	}
 
+	// Apply sorting if specified
 	if (req.query.sort) {
 		const sortBy = req.query.sort.split(",").join(" ");
-		query = Pokemon.find({}).sort(sortBy);
+		query = query.sort(sortBy);
 	}
 
-	query = Pokemon.find({});
+	// Apply pagination
 	const page = parseInt(req.query.page) || 1;
 	const limit = parseInt(req.query.limit) || 3;
 	const skip = (page - 1) * limit;

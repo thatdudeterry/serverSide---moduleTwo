@@ -1,0 +1,184 @@
+[{
+  "_id": {
+    "$oid": "66c50b56ced82b6a6ff46e63"
+  },
+  "name": "TEST-TEST",
+  "type": "POKEMON-TYPE",
+  "height": 123,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-20T21:32:06.411Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-20T21:32:06.411Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66c50bbfced82b6a6ff46e66"
+  },
+  "name": "TEST",
+  "type": "POKEMON-TYPE",
+  "height": 123,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-20T21:33:51.861Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-20T21:33:51.861Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66cb5196261ea0da262064e4"
+  },
+  "name": "TEST-TEST1",
+  "type": "POKEMON-TYPE",
+  "height": 12,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-25T15:45:26.096Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-25T15:45:26.096Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66cb519f261ea0da262064e6"
+  },
+  "name": "TEST-TEST2",
+  "type": "POKEMON-TYPE",
+  "height": 23,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-25T15:45:35.085Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-25T15:45:35.085Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66cb51aa261ea0da262064e8"
+  },
+  "name": "TEST-TEST3",
+  "type": "POKEMON-TYPE",
+  "height": 99,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-25T15:45:46.020Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-25T15:45:46.020Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66cbe5067b86541dc6202e37"
+  },
+  "name": "TEST-TEST4",
+  "type": "POKEMON-TYPE",
+  "height": 99,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-26T02:14:30.382Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-26T02:14:30.382Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66cbe5097b86541dc6202e39"
+  },
+  "name": "TEST-TEST5",
+  "type": "POKEMON-TYPE",
+  "height": 99,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-26T02:14:33.906Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-26T02:14:33.906Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66cbe50e7b86541dc6202e3b"
+  },
+  "name": "TEST-TEST6",
+  "type": "POKEMON-TYPE",
+  "height": 99,
+  "weight": 456,
+  "abilities": "ABILITY",
+  "moves": "MOVES",
+  "games": [
+    {
+      "$oid": "66c3717906764bda711231d8"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-26T02:14:38.006Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-26T02:14:38.006Z"
+  },
+  "__v": 0
+}]

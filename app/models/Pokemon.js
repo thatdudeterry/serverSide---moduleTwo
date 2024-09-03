@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
-const { type } = require("os");
+import mongoose from "mongoose";
 
 const pokemonSchema = new mongoose.Schema(
 	{
+		// _id: mongoose.Schema.Types.ObjectId,
 		name: {
 			type: String,
 			required: [true, `Name is required`],
@@ -22,6 +22,7 @@ const pokemonSchema = new mongoose.Schema(
 			min: [0, `Value must be greater than 0`],
 			max: [1000, `Value must be less than 1000`],
 		},
+
 		weight: {
 			type: Number,
 			min: [0, `Value must be greater than 0`],
@@ -45,7 +46,7 @@ const pokemonSchema = new mongoose.Schema(
 
 		games: [
 			{
-				type: mongoose.Schema.Types.ObjectId,
+				type: String,
 				ref: "PokemonGame",
 			},
 		],
@@ -53,6 +54,6 @@ const pokemonSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-module.exports = mongoose.model("Pokemon", pokemonSchema);
+export default mongoose.model("Pokemon", pokemonSchema);
 
 // https://pokeapi.co/

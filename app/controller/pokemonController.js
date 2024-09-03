@@ -1,99 +1,61 @@
-const Pokemon = require("../models/Pokemon");
+// import { successTemplate } from "../templates/templates";
+import Pokemon from "../models/Pokemon.js";
+import asyncHandler from "../middlewares/asyncHandler.js";
 
-exports.createPokemon = async (req, res) => {
+export const getAllPokemon = asyncHandler(async (req, res) => {
+	const pokemon = await Pokemon.find();
+	res.status(200).json({
+		data: pokemon,
+		success: true,
+		message: `${req.method} - Pokemon request made`,
+	});
+});
+
+export const getPokemonById = asyncHandler(async (req, res, next) => {
+	const { id } = req.params;
+	const { games } = req.query;
+	let pokemon;
+	if (games === "true") {
+		pokemon = await Pokemon.findById(id).populate("games");
+	} else {
+		pokemon = await Pokemon.findById(id);
+	}
+
+	if (!pokemon) {
+	}
+
+	res.status(200).json({
+		data: pokemon,
+		success: true,
+		message: `${req.method} - Pokemon request made`,
+	});
+});
+
+export const createPokemon = asyncHandler(async (req, res, next) => {
 	const { pokemon } = req.body;
-	try {
-		const newPokemon = await Pokemon.create(pokemon);
-		console.log("data >>>", newPokemon);
-		res.status(201).json({
-			success: true,
-			data: newPokemon,
-			message: `${req.method} - request to Pokemon endpoint`,
-		});
-	} catch (error) {
-		if (error.name === "ValidationError") {
-			console.log("Error Validating!", error);
-		} else {
-			console.log(error);
-			res.status(500).json(error);
-		}
-	}
-};
+	const pokemonData = await Pokemon.create(pokemon);
+	res.status(200).json({
+		data: pokemonData,
+		success: true,
+	});
+});
 
-exports.deletePokemon = async (req, res) => {
+export const updatePokemon = asyncHandler(async (req, res) => {
 	const { id } = req.params;
-	try {
-		const pokemon = await Pokemon.findByIdAndDelete(id, req.body);
-		res.status(200).json({
-			id,
-			success: true,
-			message: `${req.method} - request to Pokemon endpoint`,
-		});
-	} catch (error) {
-		if (error.name === "ValidationError") {
-			console.log("Error Validating!", error);
-		} else {
-			console.log(error);
-			res.status(500).json(error);
-		}
-	}
-};
+	const pokemon = await Pokemon.findByIdAndUpdate(id, req.body, {
+		new: true,
+		runValidators: true,
+	});
 
-exports.getAllPokemon = async (req, res) => {
-	try {
-		const pokemon = await Pokemon.find({});
-		res.status(200).json({
-			data: pokemon,
-			success: true,
-			message: `${req.method} - request to Pokemon endpoint`,
+	if (!pokemon) {
+		return res.status(400).json({
+			success: false,
 		});
-	} catch (error) {
-		if (error.name === "ValidationError") {
-			console.log("Error Validating!", error);
-		} else {
-			console.log(error);
-			res.status(500).json(error);
-		}
 	}
-};
 
-exports.getPokemonById = async (req, res) => {
-	const { id } = req.params;
-	try {
-		const pokemon = await Pokemon.findById(id, req.body);
-		res.status(200).json({
-			id,
-			data: pokemon,
-			success: true,
-			message: `${req.method} - request to Pokemon endpoint`,
-		});
-	} catch (error) {
-		if (error.name === "ValidationError") {
-			console.log("Error Validating!", error);
-		} else {
-			console.log(error);
-			res.status(500).json(error);
-		}
-	}
-};
+	res.status(200).json({
+		data: pokemon,
+	});
+});
 
-exports.updatePokemon = async (req, res) => {
-	const { id } = req.params;
-	try {
-		const updatedPokemon = await Pokemon.findByIdAndUpdate(id, req.body, {
-			new: true,
-		});
-		res.status(200).json({
-			data: updatedPokemon,
-			success: true,
-			message: `${req.method} - request to Pokemon endpoint`,
-		});
-	} catch (error) {
-		if (error.name === "ValidationError") {
-			console.log("Error Validating!", error);
-		} else {
-			console.log(error);
-			res.status(500).json(error);
-		}
-	}
-};
+export const deletePokemon = asyncHandler(async (req, res) => {});

@@ -1,18 +1,18 @@
-const express = require("express");
-const routeHandler = require("./routes");
-const morgan = require("morgan");
-const app = express();
+import express from require("express");
+import cors from require("cors");
+import morgan from require("morgan");
+import middlewares from "./middlewares/index.js"
+import routeHandler from require("./routes/index.js");
+import errorHandler from "./middlewares/errorHandler.js";
+import catchAllHandler from "./middlewares/catchAllHandler.js";
 
-app.use(express.json());
+const app = express()
+
+app.use(cors());
 app.use(morgan("dev"));
-
-app.get("/", (req, res) => {
-	res.status(200).json({
-		message: "API is running",
-		success: true,
-	});
-});
-
+app.use(express.json());
 app.use("/api/v1", routeHandler);
+app.use(catchAllHandler);
+app.use(errorHandler);
 
-module.exports = app;
+export default app;

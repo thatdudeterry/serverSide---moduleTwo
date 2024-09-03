@@ -1,7 +1,10 @@
-const express = require("express");
+import express from "express";
+import pokemonRoutes from "./pokemonRoutes.js";
+import pokemonGameRoutes from "./pokemonGamesRoutes.js";
+
+// const userRoutes = require("./userRoutes");
+
 const router = express.Router();
-const pokemonRoutes = require("./pokemonRoutes");
-const pokemonGameRoutes = require("./pokemonGamesRoutes");
 
 router.get("/", (req, res) => {
 	res.status(200).json({
@@ -12,5 +15,6 @@ router.get("/", (req, res) => {
 
 router.use("/pokemon", pokemonRoutes);
 router.use("/games", pokemonGameRoutes);
+// router.use("/users", userRoutes);
 
-module.exports = router;
+export default router;

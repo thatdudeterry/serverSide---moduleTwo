@@ -1,12 +1,13 @@
-const mongoose = require("mongoose");
-const { type } = require("os");
+import mongoose from "mongoose";
+// const { type } = require("os");
 
 const pokemonGamesSchema = new mongoose.Schema(
 	{
+		// _id: mongoose.Schema.Types.ObjectId,
 		gameIndex: {
 			type: Number,
 			required: [true, `Game index is required`],
-			maxlength: [5, "The max length for an index is 5 characters"],
+			maxlength: [25, "The max length for an index is 25 characters"],
 		},
 
 		games: {
@@ -66,6 +67,6 @@ const pokemonGamesSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-module.exports = mongoose.model("Games", pokemonGamesSchema);
+export default mongoose.model("Games", pokemonGamesSchema);
 
 // https://pokeapi.co/
